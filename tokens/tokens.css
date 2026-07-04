@@ -1,10 +1,10 @@
 /* AUTO-GENERATED from tokens.json by build-tokens.mjs — do not edit by hand. */
 :root {
   /* color */
-  --bs-color-accent: #A6432F;
+  --bs-color-accent: #943D2A;
   --bs-color-accent-strong: #783022;
   --bs-color-accent-tint: #F2DED8;
-  --bs-color-accent-soft: #E0BDB6;
+  --bs-color-accent-soft: #8A5240;
   --bs-color-on-accent: #FFFFFF;
   --bs-color-accent-ink: #F4F1EA;
   --bs-color-accent-ink-soft: #F2DED8;
@@ -15,10 +15,10 @@
   --bs-color-ink: #16221C;
   --bs-color-ink-soft: #5C6B63;
   --bs-color-ink-mono: #5E6B62;
-  --bs-color-line: #E4E0D4;
-  --bs-color-status-warning: #B5762A;
+  --bs-color-line: #888374;
+  --bs-color-status-warning: #7A4E17;
   --bs-color-status-warning-tint: #F3E8D6;
-  --bs-color-status-negative: #B3261E;
+  --bs-color-status-negative: #9C2016;
   --bs-color-status-negative-tint: #F4DEDD;
   /* font family */
   --bs-font-display: "Space Grotesk", sans-serif;

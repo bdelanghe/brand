@@ -22,7 +22,5 @@
     "thresholds": { "dupSeverity": "warn" }
   },
 
-  "$notScoped": "opacity and targetSize sections are omitted — no composited-opacity color usage or interactive-target-size tokens have been audited for this pinning yet. Both are optional keys the runner skips cleanly when absent (see vendor/conformance-kit/gates/token-a11y.mjs); adding them is real follow-up work, not done here.",
-
-  "$knownFailing": "palette.pairings.json currently has 11 real CVD/APCA/non-text failures (accent-on-paper under simulated deuteranopia; several decorative divider/border pairings well under the 3:1 UI floor). These need actual palette-value changes, not a rename, to fix — tracked as follow-up rather than silently omitted or faked passing."
+  "$notScoped": "opacity and targetSize sections are omitted — no composited-opacity color usage or interactive-target-size tokens have been audited for this pinning yet. Both are optional keys the runner skips cleanly when absent (see vendor/conformance-kit/gates/token-a11y.mjs); adding them is real follow-up work, not done here."
 }

@@ -40,7 +40,7 @@ const PAIRS = [
   ["accent-ink on accent", "--bs-color-accent-ink", "--bs-color-accent", 4.5],
   ["accent-ink-soft on accent", "--bs-color-accent-ink-soft", "--bs-color-accent", 4.5],
   ["status-negative on paper", "--bs-color-status-negative", "--bs-color-paper", 4.5],
-  ["status-warning on paper (large text/UI only)", "--bs-color-status-warning", "--bs-color-paper", 3],
+  ["status-warning on paper", "--bs-color-status-warning", "--bs-color-paper", 4.5],
   ["grade-enforced fg/bg", "--bs-grade-enforced-fg", "--bs-grade-enforced-bg", 4.5],
   ["grade-partial fg/bg", "--bs-grade-partial-fg", "--bs-grade-partial-bg", 4.5],
   ["grade-aspirational fg/bg", "--bs-grade-aspirational-fg", "--bs-grade-aspirational-bg", 4.5],

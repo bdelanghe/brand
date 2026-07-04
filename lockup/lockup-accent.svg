@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
   <!-- Robert DeLanghe — wide link-card lockup (OG / social 1.91:1).
-       Values from tokens.json: accent #A6432F, on-accent #FFFFFF, accent-ink #F4F1EA.
+       Values from tokens.json: accent #943D2A, on-accent #FFFFFF, accent-ink #F4F1EA.
        Tracking is the token em-ratio scaled to px: label 0.14em·20=2.8, h1 -0.025em·86=-2.15. -->
-  <rect width="1200" height="630" fill="#A6432F"/>
+  <rect width="1200" height="630" fill="#943D2A"/>
   <!-- mark (on-accent white), from mark/mark-on-accent.svg (512u grid), scaled to ~240px -->
   <g transform="translate(96,195) scale(0.469)" fill="none">
     <g fill="none" stroke="#FFFFFF" stroke-width="34" stroke-linecap="round" stroke-linejoin="round">
