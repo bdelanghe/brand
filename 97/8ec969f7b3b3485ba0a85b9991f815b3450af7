@@ -1,0 +1,35 @@
+tokens/contrast.contract.json
+  s_d0a1bec15809bc::t_fd90aaadb27043 7-8
+tools/a11y.mjs
+  s_d0a1bec15809bc::t_dc635c9dfe0e36 43
+tokens/tokens.css
+  s_d0a1bec15809bc::t_221dc778fcb87a 4,7,18-19,21
+tokens/token-a11y.json
+  s_d0a1bec15809bc::t_9323587a52a5c6 25
+tokens/tokens.json
+  s_d0a1bec15809bc::t_66d541d06a6cb8 27
+  s_d0a1bec15809bc::t_c8ae0af0d0dbdd 11,13-14,17,19
+  s_d0a1bec15809bc::t_0a6af4913b731f 39,41
+mark/mark-accent.svg
+  s_d0a1bec15809bc::t_0a8de3f7125454 4
+tokens/palette.pairings.json
+  s_d0a1bec15809bc::t_b12a18dc5f806e 31
+lockup/lockup-accent.svg
+  s_d0a1bec15809bc::t_eb31f7cca78abf 3,5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "978ec969f7b3b3485ba0a85b9991f815b3450af7",
+  "prompts": {},
+  "sessions": {
+    "s_d0a1bec15809bc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "297d0fee-c144-4ae1-8a97-9d7922657403",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
