@@ -1,0 +1,15 @@
+{
+  "$description": "Robert DeLanghe personal content tokens — canonical brand copy. The verbal half of the design system: one source of truth for words, the way tokens.json is for visuals. Surfaces (and other repos) may extend this with their own content/strings.json; the content tool merges core + per-repo.",
+  "name": {
+    "$value": "Robert DeLanghe",
+    "$description": "Name — exact casing."
+  },
+  "tagline": {
+    "$value": "AI agents ship code. I write the contracts that keep them in check.",
+    "$description": "Primary tagline — hero / link cards / titles."
+  },
+  "description": {
+    "$value": "Senior software engineer building the controls for shipping AI-written code — capability-scoped agents, signed delivery, and contracts enforced as build failures.",
+    "$description": "One-line description — meta description (kept ≤160 chars), intros."
+  }
+}

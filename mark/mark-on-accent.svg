@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-label="Robert DeLanghe">
+  <!-- monogram: r + d, the d's bowl left open — a door ajar. Transparent —
+       for placement on an accent-colored surface (lockups, social cards). -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="34" stroke-linecap="round" stroke-linejoin="round">
+    <!-- r -->
+    <path d="M150 196 V340"/>
+    <path d="M150 232 q0 -36 54 -36"/>
+    <!-- d : stem + an open bowl (gap on the lower-left = the door) -->
+    <path d="M362 150 V340"/>
+    <path d="M362 300 a52 52 0 1 1 -52 -52"/>
+  </g>
+  <circle cx="362" cy="356" r="9" fill="#56D4DD"/>
+</svg>

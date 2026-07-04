@@ -1,0 +1,28 @@
+{
+  "$comment": "Token Accessibility config for Robert DeLanghe's brand. Adapted from bounded-systems/brand's config of the same shape. Paths resolve relative to this file's dir (tokens/).",
+  "tokens": "tokens.css",
+
+  "palette": "palette.pairings.json",
+
+  "pairing": {
+    "$comment": "Coverage engine. Derives the REAL fg×bg pairings from actual stylesheet usage, UNIONs the hand-declared palette.pairings.json in, and scores every pair. Report-only (gate:false) — the hand-declared palette member is the fail-closed gate.",
+    "css": ["../css/base.css"],
+    "declared": "palette.pairings.json",
+    "gate": false
+  },
+
+  "typography": {
+    "tokens": "tokens.css",
+    "body": ["body"]
+  },
+
+  "likeness": {
+    "$comment": "Hygiene (near-duplicate tokens) + distinctness (categorical status colours must stay separable under normal AND CVD simulation). The grade trio must not collapse.",
+    "categorical": ["grade-enforced", "grade-partial", "grade-aspirational"],
+    "thresholds": { "dupSeverity": "warn" }
+  },
+
+  "$notScoped": "opacity and targetSize sections are omitted — no composited-opacity color usage or interactive-target-size tokens have been audited for this pinning yet. Both are optional keys the runner skips cleanly when absent (see vendor/conformance-kit/gates/token-a11y.mjs); adding them is real follow-up work, not done here.",
+
+  "$knownFailing": "palette.pairings.json currently has 11 real CVD/APCA/non-text failures (accent-on-paper under simulated deuteranopia; several decorative divider/border pairings well under the 3:1 UI floor). These need actual palette-value changes, not a rename, to fix — tracked as follow-up rather than silently omitted or faked passing."
+}
