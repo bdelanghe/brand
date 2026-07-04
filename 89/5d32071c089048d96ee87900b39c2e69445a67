@@ -1,0 +1,55 @@
+tokens/tokens.css
+  s_d0a1bec15809bc::t_b9f6ab05c7b252 9-11
+tools/content.mjs
+  s_d0a1bec15809bc::t_e7829e2cd241fc 1-177
+mark/mark-on-accent.svg
+  s_d0a1bec15809bc::t_ca6540eccf9671 1-13
+css/fonts.css
+  s_d0a1bec15809bc::t_caa11d0fa965f2 2,4-52
+  s_d0a1bec15809bc::t_d341fad5e1069c 1,3
+tokens/palette.pairings.json
+  s_d0a1bec15809bc::t_47b72e5dbf06b4 31
+  s_d0a1bec15809bc::t_3f42e839defc32 1-30,32-52
+lockup/lockup-accent.svg
+  s_d0a1bec15809bc::t_957d93a37dfb81 1-18,23
+  s_d0a1bec15809bc::t_456833df1ca3e0 19-22
+tokens/tokens.json
+  s_d0a1bec15809bc::t_95b857b66f5ac5 27-30
+content/strings.schema.json
+  s_d0a1bec15809bc::t_e7829e2cd241fc 1-30
+package.json
+  s_d0a1bec15809bc::t_eecf2b5a088bea 1-51
+tokens/token-a11y.json
+  s_d0a1bec15809bc::t_b44b55c99ca057 1-28
+tokens/contrast.contract.json
+  s_d0a1bec15809bc::t_7443de2f55afb2 12-15
+tools/coverage.mjs
+  s_d0a1bec15809bc::t_e7829e2cd241fc 1-190
+tools/meta.mjs
+  s_d0a1bec15809bc::t_e7829e2cd241fc 1-103
+css/base.css
+  s_d0a1bec15809bc::t_b5acf509eebe9c 1-34
+content/strings.json
+  s_d0a1bec15809bc::t_643b461aab2425 1-15
+tools/a11y.mjs
+  s_d0a1bec15809bc::t_3646303f382b13 30-32,38-43
+  s_d0a1bec15809bc::t_b3c30d078868e2 1-29,33-37,44-80
+README.md
+  s_d0a1bec15809bc::t_f42a7e27f6117f 20-21,24-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "895d32071c089048d96ee87900b39c2e69445a67",
+  "prompts": {},
+  "sessions": {
+    "s_d0a1bec15809bc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "297d0fee-c144-4ae1-8a97-9d7922657403",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
