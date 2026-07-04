@@ -24,7 +24,7 @@ jobs:
   check-contrast:
     # This pinning's own contract (tokens/contrast.contract.json) against its
     # own tokens — the generic checker + glue both live in baobab, not here.
-    uses: bounded-systems/baobab/.github/workflows/check-contrast.yml@v0.2.0
+    uses: bounded-systems/baobab/.github/workflows/check-contrast.yml@v0.2.1
     with:
       tokens-path: tokens/tokens.json
       contract-path: tokens/contrast.contract.json
