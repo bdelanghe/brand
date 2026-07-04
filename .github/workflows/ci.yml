@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tokens-drift:
+    # tokens.css is generated from tokens.json — this has been a local-only
+    # convenience check (`node tokens/build-tokens.mjs --check`) until now.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: "22"
+      - run: node tokens/build-tokens.mjs --check
+
+  check-contrast:
+    # This pinning's own contract (tokens/contrast.contract.json) against its
+    # own tokens — the generic checker + glue both live in baobab, not here.
+    uses: bounded-systems/baobab/.github/workflows/check-contrast.yml@v0.2.0
+    with:
+      tokens-path: tokens/tokens.json
+      contract-path: tokens/contrast.contract.json
