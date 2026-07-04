@@ -1,0 +1,51 @@
+{
+  "name": "@bdelanghe/brand",
+  "version": "0.1.0",
+  "description": "Robert DeLanghe's personal brand — a pinning of bounded-systems/baobab (structure, no defaults). Tokens/CSS (MIT) plus personal identity artwork.",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://robertdelanghe.dev",
+  "repository": { "type": "git", "url": "git+https://github.com/bdelanghe/brand.git" },
+  "bugs": { "url": "https://github.com/bdelanghe/brand/issues" },
+  "keywords": ["design-tokens", "brand", "css", "fonts"],
+  "engines": { "node": ">=18" },
+  "files": [
+    "css/",
+    "tokens/tokens.css",
+    "tokens/tokens.json",
+    "tokens/manifest.schema.json",
+    "tokens/token-a11y.json",
+    "tokens/palette.pairings.json",
+    "tokens/contrast.contract.json",
+    "content/strings.json",
+    "content/strings.schema.json",
+    "mark/",
+    "lockup/",
+    "favicon-32.png",
+    "tools/",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./tokens/tokens.json",
+    "./tokens.json": "./tokens/tokens.json",
+    "./tokens.css": "./tokens/tokens.css",
+    "./css/base.css": "./css/base.css",
+    "./css/fonts.css": "./css/fonts.css",
+    "./content/strings.json": "./content/strings.json",
+    "./mark/*": "./mark/*",
+    "./lockup/*": "./lockup/*",
+    "./favicon-32.png": "./favicon-32.png",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build:css": "node tokens/build-tokens.mjs",
+    "check": "node tokens/build-tokens.mjs --check",
+    "coverage": "node tools/coverage.mjs css",
+    "coverage:check": "node tools/coverage.mjs --colors --check css",
+    "content": "node tools/content.mjs",
+    "content:check": "node tools/content.mjs --check",
+    "meta": "node tools/meta.mjs",
+    "a11y": "node tools/a11y.mjs",
+    "a11y:check": "node tools/a11y.mjs --check"
+  }
+}
