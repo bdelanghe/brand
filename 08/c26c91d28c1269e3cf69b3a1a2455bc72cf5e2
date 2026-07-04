@@ -1,0 +1,19 @@
+mark/mark.svg
+  s_d0a1bec15809bc::t_ddae22ebfd6461 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "08c26c91d28c1269e3cf69b3a1a2455bc72cf5e2",
+  "prompts": {},
+  "sessions": {
+    "s_d0a1bec15809bc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "297d0fee-c144-4ae1-8a97-9d7922657403",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
