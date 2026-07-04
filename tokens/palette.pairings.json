@@ -28,7 +28,7 @@
     { "name": "status unmet / status-negative on status-negative-tint", "fg": "status-negative", "bg": "status-negative-tint", "kind": "text" },
     { "name": "status-negative on paper", "fg": "status-negative", "bg": "paper", "kind": "text" },
     { "name": "caution / status-warning on status-warning-tint", "fg": "status-warning", "bg": "status-warning-tint", "kind": "text" },
-    { "name": "status-warning on paper — large text / UI only (fails normal-text 4.5:1)", "fg": "status-warning", "bg": "paper", "kind": "large-text" },
+    { "name": "status-warning on paper", "fg": "status-warning", "bg": "paper", "kind": "text" },
 
     { "name": "grade enforced fg/bg", "fg": "grade-enforced-fg", "bg": "grade-enforced-bg", "kind": "text" },
     { "name": "grade partial fg/bg", "fg": "grade-partial-fg", "bg": "grade-partial-bg", "kind": "text" },
