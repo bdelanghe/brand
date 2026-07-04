@@ -1,8 +1,11 @@
 /* AUTO-GENERATED from tokens.json by build-tokens.mjs — do not edit by hand. */
 :root {
   /* color */
-  --bs-color-forest: #0C5A42;
-  --bs-color-forest-deep: #073D2C;
+  --bs-color-accent: #A6432F;
+  --bs-color-accent-strong: #783022;
+  --bs-color-accent-tint: #F2DED8;
+  --bs-color-accent-soft: #E0BDB6;
+  --bs-color-on-accent: #FFFFFF;
   --bs-color-paper: #EDEAE1;
   --bs-color-card: #FFFFFF;
   --bs-color-card-alt: #F4F1EA;
@@ -10,13 +13,10 @@
   --bs-color-ink-soft: #5C6B63;
   --bs-color-ink-mono: #5E6B62;
   --bs-color-line: #E4E0D4;
-  --bs-color-white: #FFFFFF;
-  --bs-color-forest-tint: #E2EBE6;
-  --bs-color-forest-soft: #D2E0D8;
-  --bs-color-clay: #A6432F;
-  --bs-color-clay-tint: #F2DED8;
-  --bs-color-amber: #B5762A;
-  --bs-color-amber-tint: #F3E8D6;
+  --bs-color-status-warning: #B5762A;
+  --bs-color-status-warning-tint: #F3E8D6;
+  --bs-color-status-negative: #B3261E;
+  --bs-color-status-negative-tint: #F4DEDD;
   /* font family */
   --bs-font-display: "Space Grotesk", sans-serif;
   --bs-font-mono: "IBM Plex Mono", monospace;
