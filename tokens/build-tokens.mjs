@@ -28,7 +28,7 @@ function genCss(t) {
   L.push("/* AUTO-GENERATED from tokens.json by build-tokens.mjs — do not edit by hand. */");
   L.push(":root {");
   L.push("  /* color */");
-  for (const k in t.color) L.push(`  --bs-color-${k}: ${resolveRef(t.color[k].$value)};`);
+  for (const k in t.color) { if (k.startsWith("$")) continue; L.push(`  --bs-color-${k}: ${resolveRef(t.color[k].$value)};`); }
   L.push("  /* font family */");
   for (const k in t.font) L.push(`  --bs-font-${k}: ${fam(t.font[k].$value)};`);
   L.push("  /* size & radius */");
@@ -36,7 +36,7 @@ function genCss(t) {
   for (const k in t.radius) L.push(`  --bs-${k}: ${t.radius[k].$value};`);
   if (t.grade) {
     L.push("  /* grade — base + derived bg/fg tints (deterministic) */");
-    const ink = resolveRef(t.color.ink.$value), white = resolveRef(t.color.white.$value);
+    const ink = resolveRef(t.color.ink.$value), white = resolveRef(t.color["on-accent"].$value);
     for (const k in t.grade) {
       if (k.startsWith("$")) continue;
       const base = t.grade[k].$value;
