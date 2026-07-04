@@ -9,5 +9,8 @@
   { "fg": "color.ink", "bg": "color.paper", "min": 4.5, "label": "primary body text on the app background" },
   { "fg": "color.ink", "bg": "color.card", "min": 4.5, "label": "primary body text on a card surface" },
   { "fg": "color.ink-soft", "bg": "color.paper", "min": 4.5, "label": "secondary text on the app background" },
-  { "fg": "color.ink-mono", "bg": "color.paper", "min": 4.5, "label": "mono label / slug text on the app background" }
+  { "fg": "color.ink-mono", "bg": "color.paper", "min": 4.5, "label": "mono label / slug text on the app background" },
+  { "fg": "color.accent-ink", "bg": "color.accent", "min": 4.5, "label": "body text on the accent panel (e.g. the seeking callout)" },
+  { "fg": "color.accent-ink-soft", "bg": "color.accent", "min": 4.5, "label": "muted/eyebrow text on the accent panel" },
+  { "fg": "color.accent-ink-line", "bg": "color.accent", "min": 3, "label": "hairline/border on the accent panel — non-text, UI floor only" }
 ]

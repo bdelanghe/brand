@@ -1,0 +1,52 @@
+{
+  "$comment": "Palette-gate contract for Robert DeLanghe's brand tokens. Declares every real foreground/background pairing the semantic tokens are designed for, plus the categorical status set. The gate (vendor/conformance-kit/gates/palette-gate.mjs) resolves fg/bg against the generated tokens.css and fails closed on any WCAG-AA, CVD-safe (deuteranopia/protanopia/tritanopia), APCA, or non-text (WCAG 1.4.11) violation. No decorative exemptions: hairlines/dividers are declared as `ui` and must clear 3:1.",
+  "$apca": "kind=text uses the gate's APCA floor (minLcText, 60). PRIMARY BODY pairings additionally declare size/weight, invoking the gate's size-aware APCA comfort tier (Lc>=90 at 16px). Secondary/label/accent roles are held to the APCA baseline floor (Lc>=60).",
+  "thresholds": {
+    "minRatioText": 4.5,
+    "minRatioLarge": 3.0,
+    "minRatioUi": 3.0,
+    "minLcText": 60,
+    "minLcLarge": 45,
+    "collapseDeltaE": 10
+  },
+  "pairings": [
+    { "name": "body / ink on paper", "fg": "ink", "bg": "paper", "kind": "text", "size": 16, "weight": 400 },
+    { "name": "body / ink on card", "fg": "ink", "bg": "card", "kind": "text", "size": 16, "weight": 400 },
+
+    { "name": "secondary / ink-soft on paper", "fg": "ink-soft", "bg": "paper", "kind": "text" },
+    { "name": "mono label / ink-mono on paper", "fg": "ink-mono", "bg": "paper", "kind": "text" },
+    { "name": "link / accent on paper", "fg": "accent", "bg": "paper", "kind": "text" },
+    { "name": "link / accent on card", "fg": "accent", "bg": "card", "kind": "text" },
+    { "name": "chip|tag / accent on card-alt", "fg": "accent", "bg": "card-alt", "kind": "text" },
+    { "name": "conformance claim / accent-strong on accent-tint", "fg": "accent-strong", "bg": "accent-tint", "kind": "text" },
+
+    { "name": "on accent / on-accent on accent", "fg": "on-accent", "bg": "accent", "kind": "text" },
+    { "name": "on accent-strong / on-accent on accent-strong", "fg": "on-accent", "bg": "accent-strong", "kind": "text" },
+    { "name": "on accent / accent-ink body text", "fg": "accent-ink", "bg": "accent", "kind": "text" },
+    { "name": "on accent / accent-ink-soft eyebrow", "fg": "accent-ink-soft", "bg": "accent", "kind": "text" },
+
+    { "name": "status unmet / status-negative on status-negative-tint", "fg": "status-negative", "bg": "status-negative-tint", "kind": "text" },
+    { "name": "status-negative on paper", "fg": "status-negative", "bg": "paper", "kind": "text" },
+    { "name": "caution / status-warning on status-warning-tint", "fg": "status-warning", "bg": "status-warning-tint", "kind": "text" },
+    { "name": "status-warning on paper — large text / UI only (fails normal-text 4.5:1)", "fg": "status-warning", "bg": "paper", "kind": "large-text" },
+
+    { "name": "grade enforced fg/bg", "fg": "grade-enforced-fg", "bg": "grade-enforced-bg", "kind": "text" },
+    { "name": "grade partial fg/bg", "fg": "grade-partial-fg", "bg": "grade-partial-bg", "kind": "text" },
+    { "name": "grade aspirational fg/bg", "fg": "grade-aspirational-fg", "bg": "grade-aspirational-bg", "kind": "text" },
+    { "name": "grade enforced on-dark / on ink", "fg": "grade-enforced-on-dark", "bg": "ink", "kind": "text" },
+    { "name": "grade partial on-dark / on ink", "fg": "grade-partial-on-dark", "bg": "ink", "kind": "text" },
+    { "name": "grade aspirational on-dark / on ink", "fg": "grade-aspirational-on-dark", "bg": "ink", "kind": "text" },
+
+    { "name": "divider / line on paper", "fg": "line", "bg": "paper", "kind": "ui" },
+    { "name": "border / line on card", "fg": "line", "bg": "card", "kind": "ui" },
+    { "name": "border / line on card-alt", "fg": "line", "bg": "card-alt", "kind": "ui" },
+    { "name": "hairline / accent-ink-line on accent", "fg": "accent-ink-line", "bg": "accent", "kind": "ui" },
+    { "name": "cta underline / accent-ink-soft on accent", "fg": "accent-ink-soft", "bg": "accent", "kind": "ui" },
+    { "name": "border / accent-soft on card", "fg": "accent-soft", "bg": "card", "kind": "ui" },
+    { "name": "blockquote bar / accent-soft on paper", "fg": "accent-soft", "bg": "paper", "kind": "ui" },
+    { "name": "card border / accent-soft on accent-tint", "fg": "accent-soft", "bg": "accent-tint", "kind": "ui" },
+    { "name": "focus ring / accent on paper", "fg": "accent", "bg": "paper", "kind": "ui" },
+    { "name": "focus ring / on-accent on accent", "fg": "on-accent", "bg": "accent", "kind": "ui" }
+  ],
+  "categorical": ["grade-enforced", "grade-partial", "grade-aspirational"]
+}
