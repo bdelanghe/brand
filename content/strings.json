@@ -11,5 +11,9 @@
   "description": {
     "$value": "Senior software engineer building the controls for shipping AI-written code — capability-scoped agents, signed delivery, and contracts enforced as build failures.",
     "$description": "One-line description — meta description (kept ≤160 chars), intros."
+  },
+  "thesis": {
+    "$value": "Draw the boundary at the door — a scope-bounded set of capabilities an agent acts through, not the process, not the container.",
+    "$description": "The core bet, stated once — transcluded by posts via {{thesis}}."
   }
 }
