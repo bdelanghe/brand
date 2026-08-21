@@ -23,22 +23,28 @@ const resolveRef = (s) =>
     return Array.isArray(n.$value) ? fam(n.$value) : n.$value;
   });
 
+// Every tier is a W3C design-token GROUP, and a group may carry `$`-prefixed
+// metadata ($description, $type) alongside its leaves. Only the color loop used to
+// skip those, so documenting the font/size/radius/text tiers the way the color tier
+// is documented would crash the build (`"a string".$value` → undefined → fam() maps
+// undefined). One shared guard, so a tier is safe to describe.
+const leaves = (group) => Object.keys(group ?? {}).filter((k) => !k.startsWith("$"));
+
 function genCss(t) {
   const L = [];
   L.push("/* AUTO-GENERATED from tokens.json by build-tokens.mjs — do not edit by hand. */");
   L.push(":root {");
   L.push("  /* color */");
-  for (const k in t.color) { if (k.startsWith("$")) continue; L.push(`  --bs-color-${k}: ${resolveRef(t.color[k].$value)};`); }
+  for (const k of leaves(t.color)) L.push(`  --bs-color-${k}: ${resolveRef(t.color[k].$value)};`);
   L.push("  /* font family */");
-  for (const k in t.font) L.push(`  --bs-font-${k}: ${fam(t.font[k].$value)};`);
+  for (const k of leaves(t.font)) L.push(`  --bs-font-${k}: ${fam(t.font[k].$value)};`);
   L.push("  /* size & radius */");
-  for (const k in t.size) L.push(`  --bs-${k}: ${t.size[k].$value};`);
-  for (const k in t.radius) L.push(`  --bs-${k}: ${t.radius[k].$value};`);
+  for (const k of leaves(t.size)) L.push(`  --bs-${k}: ${t.size[k].$value};`);
+  for (const k of leaves(t.radius)) L.push(`  --bs-${k}: ${t.radius[k].$value};`);
   if (t.grade) {
     L.push("  /* grade — base + derived bg/fg tints (deterministic) */");
     const ink = resolveRef(t.color.ink.$value), white = resolveRef(t.color["on-accent"].$value);
-    for (const k in t.grade) {
-      if (k.startsWith("$")) continue;
+    for (const k of leaves(t.grade)) {
       const base = t.grade[k].$value;
       L.push(`  --bs-grade-${k}: ${base};`);
       L.push(`  --bs-grade-${k}-bg: ${mix(base, white, 0.85)};`);
@@ -50,7 +56,7 @@ function genCss(t) {
   L.push("}");
   L.push("");
   L.push("/* Text styles — composite recipes built from the tokens above. */");
-  for (const k in t.text) {
+  for (const k of leaves(t.text)) {
     const v = t.text[k].$value;
     L.push(`.bs-text-${k} {`);
     L.push(`  font-family: ${resolveRef(v.fontFamily)};`);

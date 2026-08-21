@@ -21,7 +21,8 @@
   --bs-color-status-negative: #9C2016;
   --bs-color-status-negative-tint: #F4DEDD;
   /* font family */
-  --bs-font-display: "Space Grotesk", sans-serif;
+  --bs-font-display: "IBM Plex Sans", sans-serif;
+  --bs-font-text: "IBM Plex Serif", serif;
   --bs-font-mono: "IBM Plex Mono", monospace;
   /* size & radius */
   --bs-text-h1: 46px;
@@ -29,6 +30,7 @@
   --bs-text-title: 18px;
   --bs-text-body: 15px;
   --bs-text-label: 11px;
+  --bs-radius-none: 0px;
   --bs-radius-lg: 18px;
   --bs-radius-md: 12px;
   /* grade — base + derived bg/fg tints (deterministic) */
@@ -51,31 +53,38 @@
 
 /* Text styles — composite recipes built from the tokens above. */
 .bs-text-h1 {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 46px;
   font-weight: 600;
   line-height: 1.02;
   letter-spacing: -0.025em;
 }
 .bs-text-h2 {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 26px;
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
 .bs-text-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
 .bs-text-body {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
+  letter-spacing: 0;
+}
+.bs-text-prose {
+  font-family: "IBM Plex Serif", serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
   letter-spacing: 0;
 }
 .bs-text-label {
