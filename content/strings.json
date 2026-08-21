@@ -5,7 +5,7 @@
     "$description": "Name — exact casing."
   },
   "tagline": {
-    "$value": "I design boundaries for systems that act.",
+    "$value": "I make software safe to run when you can't fully trust what it will do.",
     "$description": "Primary tagline — hero / link cards / titles. Kept in step with bdelanghe/site's basics.headline, which is the same slot said twice; collapsing the duplication is separate work."
   },
   "description": {
