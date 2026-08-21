@@ -15,9 +15,9 @@
   </g>
   <!-- text block (bs-text-label / bs-text-h1 / bs-text-body) -->
   <text x="400" y="262" font-family="IBM Plex Mono, monospace" font-size="20" font-weight="500" letter-spacing="2.8" fill="#FFFFFF" fill-opacity="0.72">ROBERT DELANGHE · RESUME</text>
-  <text x="398" y="346" font-family="Space Grotesk, sans-serif" font-size="86" font-weight="600" letter-spacing="-2.15" fill="#FFFFFF">Robert DeLanghe</text>
-  <text x="400" y="404" font-family="Space Grotesk, sans-serif" font-size="26" font-weight="400" fill="#F4F1EA">
-    <tspan x="400" dy="0">AI agents ship code. I write the</tspan>
-    <tspan x="400" dy="34">contracts that keep them in check.</tspan>
+  <text x="398" y="346" font-family="IBM Plex Sans, sans-serif" font-size="86" font-weight="600" letter-spacing="-2.15" fill="#FFFFFF">Robert DeLanghe</text>
+  <text x="400" y="404" font-family="IBM Plex Sans, sans-serif" font-size="26" font-weight="400" fill="#F4F1EA">
+    <tspan x="400" dy="0">I make software safe to run when you</tspan>
+    <tspan x="400" dy="34">can&#8217;t fully trust what it will do.</tspan>
   </text>
 </svg>

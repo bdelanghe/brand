@@ -31,8 +31,14 @@ lone                        per-component a11y spec engine (jsr:@bounded-systems
   simulated deuteranopia; several decorative divider/border pairings are well under the 3:1
   UI floor). Fixing these needs real palette-value changes, not a rename — tracked as
   follow-up work, not done in the initial brick recolor.
-- `css/base.css`, `css/fonts.css` + `css/fonts/*.woff2` — resets and self-hosted fonts
-  (OFL: Space Grotesk, IBM Plex Mono — same choice as `bounded-systems/brand`).
+- `css/base.css`, `css/fonts.css` + `css/fonts/*.woff2` — resets and self-hosted fonts:
+  the **IBM Plex superfamily** (OFL), `Sans` for identity and UI, `Serif` for narrative
+  prose, `Mono` for labels and identifiers, with `css/fonts/LICENSE-OFL-IBM-Plex.txt`
+  shipped alongside the bytes. This is the axis on which this pinning **diverges** from
+  `bounded-systems/brand`, which keeps Space Grotesk: two pinnings of one structure
+  should not be typographically indistinguishable, and until #5 they pinned the same two
+  families. One superfamily rather than three separate picks — Plex Sans / Serif / Mono
+  share metrics and drawing, so the pairing is restrained by construction.
 - `mark/`, `lockup/`, `favicon-32.png` — the personal "r+d, door ajar" monogram, recolored
   to the brick accent.
 - `content/strings.json` + `tools/{coverage,content,meta,a11y}.mjs` — content-token catalog
