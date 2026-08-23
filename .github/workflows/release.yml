@@ -1,0 +1,25 @@
+name: release
+
+# Release provenance via mint. On a v<version> tag cut from a CHECKOUT
+# (`mint release`), emits the deterministic in-toto release Statement
+# (tag -> version plan -> commit), keyless-signs it (cosign/OIDC) and attaches it
+# to the GitHub release. The npm publish stays in publish.yml.
+#
+# THE CI-CUT PATH DOES NOT COME THROUGH HERE and cannot race this workflow. A tag
+# pushed by `release-cut` carries GITHUB_TOKEN, and GitHub creates no workflow
+# runs from those events — so this trigger is silent for a dispatched cut, and
+# cut.yml calls release-provenance itself as a dependent job. Exactly one of the
+# two paths ever runs for a given tag.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write # create / upload to the GitHub release
+  id-token: write # OIDC — cosign keyless signing
+
+jobs:
+  release:
+    uses: bounded-systems/mint/.github/workflows/release-provenance.yml@44d61e153a0c0bdbe44ce651f8bea4defe8ede51 # mint v0.7.2
+    with:
+      ref: 44d61e153a0c0bdbe44ce651f8bea4defe8ede51
