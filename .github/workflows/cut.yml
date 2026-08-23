@@ -1,0 +1,66 @@
+name: cut
+
+# The release, dispatched. brand has never been released at all — no tags, no
+# registry presence — so its FIRST release is cut this way rather than from
+# someone's laptop.
+#
+# WHY EVERYTHING DOWNSTREAM IS CHAINED RATHER THAN TRIGGERED: GitHub creates no
+# workflow runs from events caused by GITHUB_TOKEN, so neither publish.yml's
+# `push: tags` nor release.yml's fires for the tag this cuts. Leaving them to
+# their triggers yields a tag, a green run, and no release.
+#
+# DRY RUN DEFAULTS TO TRUE. An npm publish is irreversible; verifying is the
+# default and releasing is the explicit act.
+
+on:
+  workflow_dispatch:
+    inputs:
+      expect-version:
+        description: "Version you expect to cut (e.g. 0.1.0). Fails if package.json disagrees."
+        type: string
+        required: false
+      dry-run:
+        description: "Verify only — run every guard and cut nothing."
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  cut:
+    permissions:
+      contents: write # create + push the tag
+    uses: bounded-systems/mint/.github/workflows/release-cut.yml@44d61e153a0c0bdbe44ce651f8bea4defe8ede51 # mint v0.7.2
+    with:
+      ref: 44d61e153a0c0bdbe44ce651f8bea4defe8ede51
+      expect-version: ${{ inputs.expect-version }}
+      dry-run: ${{ inputs.dry-run }}
+
+  publish:
+    needs: cut
+    if: needs.cut.outputs.cut == 'true'
+    permissions:
+      contents: read
+      id-token: write # OIDC — npm trusted publishing
+    uses: ./.github/workflows/publish.yml
+    with:
+      # Load-bearing: this run's event is workflow_dispatch on a BRANCH, so
+      # without it every job would publish main under a tag's name.
+      tag: ${{ needs.cut.outputs.tag }}
+
+  provenance:
+    needs: cut
+    if: needs.cut.outputs.cut == 'true'
+    permissions:
+      contents: write # create / upload to the GitHub release
+      id-token: write # OIDC — cosign keyless signing
+      # Not optional. GitHub validates a called workflow's permission requests as
+      # the UNION of its permissions block AT LOAD TIME, before any `if:`.
+      # release-provenance.yml asks for actions: read, so withholding it fails the
+      # whole run with a startup_failure and no job ever starts.
+      actions: read
+    uses: bounded-systems/mint/.github/workflows/release-provenance.yml@44d61e153a0c0bdbe44ce651f8bea4defe8ede51 # mint v0.7.2
+    with:
+      ref: 44d61e153a0c0bdbe44ce651f8bea4defe8ede51
+      tag: ${{ needs.cut.outputs.tag }}

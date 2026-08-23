@@ -1,0 +1,114 @@
+name: publish
+
+# @bdelanghe/brand -> npm, on a v<version> tag.
+#
+# No long-lived secret: npm authenticates via the job's short-lived GitHub
+# Actions OIDC token (trusted publishing). npm's own deprecation of 2FA-bypass
+# tokens (2026-07-08) makes this the only automated publishing path with a
+# future — direct publish from a long-lived token goes away around Jan 2027.
+#
+# TWO WAYS IN, ONE SOURCE OF TRUTH FOR THE TAG:
+#   push: tags     - a tag cut from a checkout. `github.ref_name` is the tag.
+#   workflow_call  - chained after `release-cut` by cut.yml. That run's event is
+#                    workflow_dispatch on a BRANCH, so `github.ref_name` is the
+#                    branch and the caller MUST pass the cut tag instead.
+# Every job checks out `inputs.tag || github.ref_name`, so the two cannot
+# diverge. Without the pin a chained run would publish main under a tag's name.
+
+on:
+  push:
+    tags: ["v*"]
+  # Standalone dispatch is the RECOVERY door for a release whose tag exists but
+  # whose publish did not land. It takes the same tag input for the same reason.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to publish, e.g. v0.1.0. Empty = the current branch."
+        type: string
+        required: false
+  workflow_call:
+    inputs:
+      tag:
+        description: "The v<version> tag to publish. A chained caller MUST pass it."
+        type: string
+        default: ""
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+      - name: package.json version matches the tag
+        run: |
+          set -euo pipefail
+          pkg=$(jq -r .version package.json)
+          case "$TAG" in
+            v[0-9]*) tag="${TAG#v}" ;;
+            *)
+              tag="$pkg"
+              echo "::notice::no tag in scope (ref '$TAG') — not comparing against a tag" ;;
+          esac
+          echo "package.json=$pkg tag=$tag"
+          if [ "$pkg" != "$tag" ]; then
+            echo "::error::version mismatch — keep package.json and the v<version> tag in sync"
+            exit 1
+          fi
+      # tokens.css is GENERATED from tokens.json. Publishing a tarball whose
+      # generated CSS does not match its source would ship tokens that no longer
+      # describe the palette they claim to.
+      - name: tokens.css is in sync with tokens.json
+        run: node tokens/build-tokens.mjs --check
+
+  npm:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # mint the OIDC token npm exchanges for publish auth
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+      # ASSERT, DO NOT MUTATE. `npm install -g npm@latest` in a release path is
+      # how npm v12 arrived unannounced and killed a site-mcp publish.
+      - name: Assert npm >= 11.5 (trusted publishing)
+        run: |
+          set -euo pipefail
+          have=$(npm --version)
+          echo "npm $have"
+          if [ "$(printf '%s\n11.5.0\n' "$have" | sort -V | head -1)" != "11.5.0" ]; then
+            echo "::error::npm $have is below 11.5, which trusted publishing requires." \
+                 "Raise node-version rather than installing npm globally here."
+            exit 1
+          fi
+      # Idempotent: a partial release must be recoverable by re-dispatching, and
+      # npm refuses to republish a version — so an already-published registry is
+      # a SKIP, not a failure.
+      - name: Already on npm?
+        id: onnpm
+        run: |
+          set -euo pipefail
+          name=$(jq -r .name package.json)
+          version=$(jq -r .version package.json)
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::npm already has $name@$version — skipping the publish"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      # No NPM_TOKEN: npm performs the OIDC exchange with the trusted-publisher
+      # endpoint and attaches provenance automatically. brand has no
+      # dependencies and no lockfile, so there is nothing to install first.
+      - name: Publish to npm (trusted publishing + provenance)
+        if: steps.onnpm.outputs.skip != 'true'
+        run: npm publish --provenance --access public
