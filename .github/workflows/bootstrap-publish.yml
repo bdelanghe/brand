@@ -39,8 +39,14 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
-          node-version: "22"
+          # Node 24, not 22: trusted publishing needs npm >= 11.5.1, and Node 22
+          # ships npm 10.9.8 — proven by a real run, which the floor assert below
+          # refused before it could reach npm. npm's docs say "Node >= 22.14.0",
+          # which is necessary but NOT sufficient; the npm floor is what binds.
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
+          # npm recommends never caching in release builds.
+          package-manager-cache: false
 
       # SELF-OBSOLETING. Once the package exists, trusted publishing can be
       # configured and this workflow has no reason to run again — so it refuses
