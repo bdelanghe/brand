@@ -77,17 +77,23 @@ jobs:
           ref: ${{ inputs.tag || github.ref_name }}
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
-          node-version: "22"
+          # Node 24, not 22: trusted publishing needs npm >= 11.5.1, and Node 22
+          # ships npm 10.9.8 — proven by a real run, which the floor assert below
+          # refused before it could reach npm. npm's docs say "Node >= 22.14.0",
+          # which is necessary but NOT sufficient; the npm floor is what binds.
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
+          # npm recommends never caching in release builds.
+          package-manager-cache: false
       # ASSERT, DO NOT MUTATE. `npm install -g npm@latest` in a release path is
       # how npm v12 arrived unannounced and killed a site-mcp publish.
-      - name: Assert npm >= 11.5 (trusted publishing)
+      - name: Assert npm >= 11.5.1 (trusted publishing)
         run: |
           set -euo pipefail
           have=$(npm --version)
           echo "npm $have"
-          if [ "$(printf '%s\n11.5.0\n' "$have" | sort -V | head -1)" != "11.5.0" ]; then
-            echo "::error::npm $have is below 11.5, which trusted publishing requires." \
+          if [ "$(printf '%s\n11.5.1\n' "$have" | sort -V | head -1)" != "11.5.1" ]; then
+            echo "::error::npm $have is below 11.5.1, which trusted publishing requires." \
                  "Raise node-version rather than installing npm globally here."
             exit 1
           fi
