@@ -89,5 +89,7 @@ jobs:
       - name: What to do now
         run: |
           echo "::notice::Published. Now: (1) configure the trusted publisher on npmjs.com" \
-               "— publish.yml, empty environment; (2) delete the NPM_TOKEN secret;" \
-               "(3) delete .github/workflows/bootstrap-publish.yml. Releases after this are OIDC-only."
+               "— bdelanghe / brand / release.yml / environment npm-publish (mint#48: npm validates" \
+               "the ENTRY workflow's filename, and a package gets exactly one publisher);" \
+               "(2) delete the NPM_TOKEN secret; (3) delete .github/workflows/bootstrap-publish.yml." \
+               "Releases after this are OIDC-only, through release.yml."

@@ -37,6 +37,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
+    "test": "node --test test/*.test.mjs",
     "build:css": "node tokens/build-tokens.mjs",
     "check": "node tokens/build-tokens.mjs --check",
     "coverage": "node tools/coverage.mjs css",
