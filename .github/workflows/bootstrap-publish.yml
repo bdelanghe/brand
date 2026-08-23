@@ -25,6 +25,15 @@ on:
         description: "Version to publish, e.g. 0.1.0. Must match package.json."
         type: string
         required: true
+      otp:
+        description: >-
+          Current 6-digit 2FA code from your authenticator. Passed to npm as
+          --otp, so the account's 2FA-on-writes stays ENFORCED — no bypass
+          token. The code is single-use and expires in ~30s; the run reaches
+          the publish step in ~11s (measured), so dispatch immediately after
+          reading it. Leave empty only if the token bypasses 2FA.
+        type: string
+        required: false
 
 permissions:
   contents: read
@@ -77,14 +86,23 @@ jobs:
       - name: Publish (token auth, OIDC provenance)
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          OTP: ${{ inputs.otp }}
         run: |
           set -euo pipefail
           if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
-            echo "::error::NPM_TOKEN is not set. Add it as a repository secret —" \
-                 "a granular access token scoped to publish this package, and delete it afterwards."
+            echo "::error::NPM_TOKEN is not set. Add it as a repository secret — a granular" \
+                 "access token with read+write on the OWNING SCOPE (the package does not" \
+                 "exist yet, so it cannot be selected by name), and delete it afterwards."
             exit 1
           fi
-          npm publish --access public --provenance
+          # 2FA-on-writes surfaces here as EOTP: npm cannot prompt in CI. The
+          # dispatch-time --otp is the fix that keeps 2FA enforced; a Bypass-2FA
+          # token is the fallback npm itself is deprecating.
+          if [ -n "${OTP:-}" ]; then
+            npm publish --access public --provenance --otp "$OTP"
+          else
+            npm publish --access public --provenance
+          fi
 
       - name: What to do now
         run: |
