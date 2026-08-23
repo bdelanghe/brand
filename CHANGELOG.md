@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 — 2026-08-23
+
+### Patch
+
+- No content change — 0.1.1 exists so brand has a release record. 0.1.0 was published by the bootstrap workflow, from a commit, leaving no tag, no GitHub release, no in-toto Statement and no signature; this is the first version cut through `release.yml` end to end.
+
 ## 0.1.0 — 2026-08-23
 
 ### Minor
