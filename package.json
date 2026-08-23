@@ -1,14 +1,26 @@
 {
   "name": "@bdelanghe/brand",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Robert DeLanghe's personal brand — a pinning of bounded-systems/baobab (structure, no defaults). Tokens/CSS (MIT) plus personal identity artwork.",
   "type": "module",
   "license": "MIT",
   "homepage": "https://robertdelanghe.dev",
-  "repository": { "type": "git", "url": "git+https://github.com/bdelanghe/brand.git" },
-  "bugs": { "url": "https://github.com/bdelanghe/brand/issues" },
-  "keywords": ["design-tokens", "brand", "css", "fonts"],
-  "engines": { "node": ">=18" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdelanghe/brand.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bdelanghe/brand/issues"
+  },
+  "keywords": [
+    "design-tokens",
+    "brand",
+    "css",
+    "fonts"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "files": [
     "css/",
     "tokens/tokens.css",
