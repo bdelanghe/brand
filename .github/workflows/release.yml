@@ -16,12 +16,11 @@ name: release
 #
 #   npm form:  bdelanghe / brand / release.yml / npm-publish
 #
-# THE ONE EXCEPTION IS `bootstrap-publish.yml`, and it is not a second trusted
-# publisher: it authenticates with a granular access TOKEN, because npm cannot
-# attach a trusted publisher to a package that does not exist yet (npm/cli#8544).
-# It refuses once the package exists, and both it and its secret are deleted the
-# moment the publisher is configured. Nothing OIDC-shaped may live outside this
-# file — release.test.mjs asserts that.
+# There are NO exceptions: nothing else in this repo may run `npm publish` or
+# call the lane, and test/workflows.test.mjs asserts that unconditionally. The
+# `bootstrap-publish.yml` that once carved one out — token-authenticated,
+# because npm cannot attach a trusted publisher to a package that does not yet
+# exist (npm/cli#8544) — did its one job for brand@0.1.0 and is deleted.
 #
 # ############################################################################
 # # THREE DOORS, ONE TAG.                                                    #

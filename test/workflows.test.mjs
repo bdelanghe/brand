@@ -39,7 +39,6 @@ function jobBlocks(yaml) {
 }
 
 const ENTRY = "release.yml";
-const BOOTSTRAP = "bootstrap-publish.yml";
 const LANE = "npm-publish.yml";
 
 // THE PRESCRIBED CALLER FILENAME (mint#48).
@@ -60,39 +59,19 @@ test("exactly one workflow is an OIDC npm entry point, and it is the prescribed 
     return /\bnpm publish\b/.test(src) || src.includes(LANE);
   });
 
-  // The bootstrap is the one documented exception, and it is NOT a second
-  // trusted publisher: npm cannot attach one to a package that does not exist
-  // (npm/cli#8544), so the first publish authenticates with a granular access
-  // TOKEN. It is allowed to exist only while it is token-shaped and refuses to
-  // run twice — asserted below — and it is deleted once the publisher is set up.
-  const allowed = [ENTRY, ...(names().includes(BOOTSTRAP) ? [BOOTSTRAP] : [])];
+  // No exceptions remain. The bootstrap workflow carved one out while the
+  // package did not exist — npm cannot attach a trusted publisher to a name it
+  // has never seen (npm/cli#8544) — so that first publish had to authenticate
+  // with a token. The package exists now, the publisher is configured, and both
+  // the workflow and its token are deleted. The invariant is unconditional.
   assert.deepEqual(
     reaches.sort(),
-    allowed.sort(),
+    [ENTRY],
     `npm validates the entry workflow's filename and a package gets ONE trusted ` +
       `publisher, so exactly one file may reach npm over OIDC: ${ENTRY}. Found: ${reaches.join(", ")}`,
   );
 });
 
-test("the bootstrap is token-authenticated and refuses to become a second publish path", (t) => {
-  if (!names().includes(BOOTSTRAP)) return t.skip("bootstrap deleted — the package exists and OIDC owns the publish");
-  const src = code(wf(BOOTSTRAP));
-  assert.match(
-    src,
-    /NODE_AUTH_TOKEN: \$\{\{ secrets\.NPM_TOKEN \}\}/,
-    "the bootstrap must authenticate with a token; an OIDC one would be a second trusted publisher",
-  );
-  assert.match(
-    src,
-    /npm view "\$name" version/,
-    "the bootstrap must refuse once the package exists, or it becomes a permanent token-shaped publish path",
-  );
-  assert.doesNotMatch(
-    src,
-    /^\s+push:\s*$/m,
-    "the bootstrap must stay dispatch-only — a tag trigger would make it a release path",
-  );
-});
 
 // #48/mint#49. Each property below is the kind a later edit undoes by accident.
 test("release.yml: three doors, a chained cut, and one resolved tag", () => {
